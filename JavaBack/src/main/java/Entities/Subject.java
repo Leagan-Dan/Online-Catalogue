@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="subject")
+@Table(name="Subject")
 @NamedQueries({
         @NamedQuery(name = "Subject.findAll",
                 query = "select e from Subject e order by e.name"),
@@ -14,7 +14,7 @@ public class Subject implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
-    @Column(name="string")
+    @Column(name="name")
     private String name;
     @Column(name="credits")
     private int credits;
