@@ -4,9 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="Student")
+@Table(name="Student1")
 @NamedQueries({
-        @NamedQuery(name="Student.findAll", query = "select e from Student e order by e.lastName")
+        @NamedQuery(name="Student.findAll", query = "select e from Student e order by e.lastName"),
+        @NamedQuery(name="Student.findById", query = "select e from Student e where e.id = :id"),
+        @NamedQuery(name="Student.findByName", query = "select e from Student e where e.lastName = :lastName AND e.firstName = :firstName")
 })
 public class Student implements Serializable {
     @Id
@@ -93,6 +95,6 @@ public class Student implements Serializable {
                 ", year=" + year +
                 ", semester=" + semester +
                 ", email='" + email + '\'' +
-                '}';
+                '}'+ '\n';
     }
 }

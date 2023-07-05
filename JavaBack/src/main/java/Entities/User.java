@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User")
+@Table(name = "User2")
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "select e from User e order by e.username"),
         @NamedQuery(name="User.findById", query = "select e from User e where e.id = :id"),
@@ -58,6 +58,6 @@ public class User implements Serializable {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                '}' + '\n';
     }
 }
