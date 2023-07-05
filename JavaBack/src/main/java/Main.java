@@ -21,7 +21,9 @@ public class Main {
 
         UserDAO userDAO = new UserDAO();
         User user = new User("AndreiBB", "pass");
-        userDAO.Create(user);
+        //userDAO.Create(user);
+        System.out.println("Find by id: " + userDAO.FindById(966));
+        System.out.println("Find by username: " + userDAO.FindByUsername("AndreiBB"));
         System.out.println(userDAO.FindAll());
     }
 }

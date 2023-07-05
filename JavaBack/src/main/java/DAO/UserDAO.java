@@ -18,7 +18,7 @@ public class UserDAO {
     public User FindByUsername(String username){
         TypedQuery<User> query = Manager.getInstance().getManager().createNamedQuery("User.findByUsername", User.class);
         query.setParameter("username", username);
-        return query.getSingleResult();
+        return query.getResultList().get(0);
     }
 
     public List<User> FindAll(){
