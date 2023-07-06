@@ -23,6 +23,7 @@ public class SubjectDAO {
     }
 
     public void Create(Subject subject){
+        //Manager.getInstance().getManager().getTransaction().begin();
         Manager.getInstance().getManager().persist(subject);
         Manager.getInstance().getManager().getTransaction().commit();
     }

@@ -26,6 +26,7 @@ public class UserDAO {
     }
 
     public void Create(User user){
+        Manager.getInstance().getManager().getTransaction().begin();
         Manager.getInstance().getManager().persist(user);
         Manager.getInstance().getManager().getTransaction().commit();
     }
