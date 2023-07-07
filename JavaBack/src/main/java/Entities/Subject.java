@@ -52,7 +52,12 @@ public class Subject implements Serializable{
         this.credits=credits;
     }
 
-    public String toString(){
-        return id + " " + name + " " + credits;
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", credits=" + credits +
+                '}' + '\n';
     }
 }

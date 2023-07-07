@@ -13,10 +13,10 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "studentId")
     Student student;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "subjectId")
     Subject subject;
     @Column(name = "grade")
@@ -54,6 +54,14 @@ public class Grade {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

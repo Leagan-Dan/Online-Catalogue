@@ -15,11 +15,11 @@ public class GradeDAO {
     }
 
 
-    public List<Grade> FindByStudentSubject(Student student, Subject subject){
+    public Grade FindByStudentSubject(Student student, Subject subject){
         TypedQuery<Grade> query = Manager.getInstance().getManager().createNamedQuery("Grade.findByStudentSubject", Grade.class);
         query.setParameter("studentId", student);
         query.setParameter("subjectId", subject);
-        return query.getResultList();
+        return query.getResultList().get(0);
     }
 
     public List<Grade> FindAll(){
@@ -34,7 +34,7 @@ public class GradeDAO {
         Manager.getInstance().getManager().getTransaction().commit();
     }
 
-    public void DeleteById(int id){
+    public void DeleteById(long id){
         Grade grade = Manager.getInstance().getManager().find(Grade.class, id);
         Manager.getInstance().getManager().remove(grade);
         Manager.getInstance().getManager().getTransaction().commit();

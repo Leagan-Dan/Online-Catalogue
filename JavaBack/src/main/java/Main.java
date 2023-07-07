@@ -31,10 +31,15 @@ public class Main {
         System.out.println(userDAO.FindAll());
 
         GradeDAO gradeDAO = new GradeDAO();
-        Grade grade = new Grade(student,subject, 7);
+        //Grade grade = new Grade(student,subject, 7);
         //gradeDAO.Create(grade);
+        //Student student1 = studentDAO.findById(1027);
+        //Subject subject1 = subjectDAO.findById(1026);
+        //Grade grade1 = gradeDAO.FindByStudentSubject(student1, subject1);
+        //gradeDAO.DeleteById(grade1.getId());
+        //System.out.println("find by id: " + gradeDAO.FindByStudentSubject(student1, subject1));
         System.out.println(gradeDAO.FindAll());
-        //System.out.println(gradeDAO.FindByStudentSubject(student, subject));
+
 
     }
 }
