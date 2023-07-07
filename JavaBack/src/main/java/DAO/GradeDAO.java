@@ -3,12 +3,13 @@ package DAO;
 import Entities.Grade;
 import Entities.Student;
 import Entities.Subject;
+import IRepository.IGradeDAO;
 import Manager.Manager;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class GradeDAO {
+public class GradeDAO implements IGradeDAO {
 
     public Grade FindById(int id){
         return Manager.getInstance().getManager().find(Grade.class,id);

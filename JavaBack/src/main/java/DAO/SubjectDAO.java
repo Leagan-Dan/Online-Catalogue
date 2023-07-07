@@ -1,12 +1,13 @@
 package DAO;
 
 import Entities.Subject;
+import IRepository.ISubjectDAO;
 import Manager.Manager;
 
 import java.util.List;
 
-public class SubjectDAO {
-    public Subject findByName(String name){
+public class SubjectDAO implements ISubjectDAO {
+    public Subject FindByName(String name){
         try{
             return Manager.getInstance().getManager().createQuery("select a from Subject a.name='\" + name + \"'\"", Subject.class).getResultList().get(0);
         }catch (Exception e){
@@ -14,7 +15,7 @@ public class SubjectDAO {
         }
     }
 
-    public Subject findById(int id){
+    public Subject FindById(int id){
         try{
             return Manager.getInstance().getManager().find(Subject.class,id);
         }catch (Exception e) {
@@ -28,7 +29,7 @@ public class SubjectDAO {
         Manager.getInstance().getManager().getTransaction().commit();
     }
 
-    public List<Subject> findAll(){
+    public List<Subject> FindAll(){
         try{
             return Manager.getInstance().getManager().createNamedQuery("Subject.findAll",Subject.class).getResultList();
         }catch (Exception e){

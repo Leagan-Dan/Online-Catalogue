@@ -2,13 +2,14 @@ package DAO;
 
 import Entities.Subject;
 import Entities.User;
+import IRepository.IUserDAO;
 import Manager.Manager;
 
 import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements IUserDAO {
     public User FindById(int id){
         TypedQuery<User> query = Manager.getInstance().getManager().createNamedQuery("User.findById", User.class);
         query.setParameter("id", id);
