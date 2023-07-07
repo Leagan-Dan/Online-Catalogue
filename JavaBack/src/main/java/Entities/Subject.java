@@ -2,6 +2,7 @@ package Entities;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="Subject")
@@ -18,6 +19,8 @@ public class Subject implements Serializable{
     private String name;
     @Column(name="credits")
     private int credits;
+    @OneToMany(mappedBy = "subject")
+    private List<Grade> subjectGrades;
 
     public Subject(){
 
@@ -50,6 +53,14 @@ public class Subject implements Serializable{
 
     public void setCredits(int credits){
         this.credits=credits;
+    }
+
+    public List<Grade> getSubjectGrades() {
+        return subjectGrades;
+    }
+
+    public void setSubjectGrades(List<Grade> subjectGrades) {
+        this.subjectGrades = subjectGrades;
     }
 
     @Override

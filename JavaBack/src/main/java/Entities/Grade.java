@@ -13,10 +13,10 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "studentId")
     Student student;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "subjectId")
     Subject subject;
     @Column(name = "grade")

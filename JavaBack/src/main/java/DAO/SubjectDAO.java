@@ -24,7 +24,9 @@ public class SubjectDAO implements ISubjectDAO {
     }
 
     public void Create(Subject subject){
-        //Manager.getInstance().getManager().getTransaction().begin();
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         Manager.getInstance().getManager().persist(subject);
         Manager.getInstance().getManager().getTransaction().commit();
     }

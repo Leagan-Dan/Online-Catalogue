@@ -2,6 +2,7 @@ package Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="Student1")
@@ -25,7 +26,8 @@ public class Student implements Serializable {
     private int semester;
     @Column(name = "email")
     private String email;
-
+    @OneToMany(mappedBy = "student")
+    private List<Grade> StudentGrades;
     public Student(){
 
     }
@@ -84,6 +86,14 @@ public class Student implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Grade> getStudentGrades() {
+        return StudentGrades;
+    }
+
+    public void setStudentGrades(List<Grade> studentGrades) {
+        StudentGrades = studentGrades;
     }
 
     @Override

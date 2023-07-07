@@ -29,7 +29,9 @@ public class StudentDAO implements IStudentDAO {
     }
 
     public void Create(Student student){
-        Manager.getInstance().getManager().getTransaction().begin();
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         Manager.getInstance().getManager().persist(student);
         Manager.getInstance().getManager().getTransaction().commit();
     }

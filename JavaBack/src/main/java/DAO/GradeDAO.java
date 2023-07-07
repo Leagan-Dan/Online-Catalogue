@@ -30,7 +30,9 @@ public class GradeDAO implements IGradeDAO {
 
     public void Create (Grade grade)
     {
-        Manager.getInstance().getManager().getTransaction().begin();
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         Manager.getInstance().getManager().persist(grade);
         Manager.getInstance().getManager().getTransaction().commit();
     }
