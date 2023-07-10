@@ -3,10 +3,12 @@ package lab11.compulsory.Repository;
 import lab11.compulsory.Entities.Student;
 import lab11.compulsory.IRepository.IStudentRepository;
 import lab11.compulsory.Manager.Manager;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class StudentRepository implements IStudentRepository {
 
     public Student FindById(int id){
