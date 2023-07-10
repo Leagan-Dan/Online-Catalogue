@@ -27,6 +27,11 @@ public class StudentController {
        return studentService.FindAll();
     }
 
+    @GetMapping("/get/student")
+    public Student GetStudent(@RequestParam(name = "id") int id){
+        return studentService.FindById(id);
+    }
+
     @PostMapping("/add/student")
     public boolean AddStudent(@RequestParam(name = "firstName") String firstName,
                               @RequestParam(name = "lastName") String lastName,
