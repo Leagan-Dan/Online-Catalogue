@@ -21,6 +21,10 @@ public class StudentService {
         return studentRepository.FindAll();
     }
 
+    public Student FindById(int id){
+        return studentRepository.FindById(id);
+    }
+
     public void PostDummyStudent(){
         Student student = new Student("Andrei", "Lupu", 2, 2, "mail@yahoo.com");
         studentRepository.Create(student);
@@ -29,5 +33,13 @@ public class StudentService {
     public void AddStudent(String firstName, String lastName, int year, int semester, String email){
         Student student = new Student(firstName, lastName, year, semester,email);
         studentRepository.Create(student);
+    }
+
+    public void AddStudent(Student student){
+        studentRepository.Create(student);
+    }
+
+    public void DeleteStudentById(int id){
+        studentRepository.DeleteById(id);
     }
 }
