@@ -6,13 +6,15 @@ import lab11.compulsory.Entities.Subject;
 import lab11.compulsory.IRepository.IGradeRepository;
 import lab11.compulsory.Manager.Manager;
 import lab11.compulsory.IRepository.IGradeRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class GradeRepository implements IGradeRepository {
 
-    public Grade FindById(int id){
+    public Grade FindById(long id){
         return Manager.getInstance().getManager().find(Grade.class,id);
     }
 
@@ -39,6 +41,9 @@ public class GradeRepository implements IGradeRepository {
     }
 
     public void DeleteById(long id){
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         Grade grade = Manager.getInstance().getManager().find(Grade.class, id);
         Manager.getInstance().getManager().remove(grade);
         Manager.getInstance().getManager().getTransaction().commit();

@@ -1,16 +1,28 @@
 package lab11.compulsory.Mapper;
 
+import lab11.compulsory.DTOs.GradeDTOs.CreateGradeDTO;
+import lab11.compulsory.DTOs.GradeDTOs.GradeDTO;
 import lab11.compulsory.DTOs.StudentDTOs.CreateStudentDTO;
 import lab11.compulsory.DTOs.StudentDTOs.StudentDTO;
 import lab11.compulsory.DTOs.SubjectDTOs.CreateSubjectDTO;
 import lab11.compulsory.DTOs.SubjectDTOs.SubjectDTO;
 import lab11.compulsory.DTOs.UserDTOs.CreateUserDTO;
 import lab11.compulsory.DTOs.UserDTOs.UserDTO;
+import lab11.compulsory.Entities.Grade;
 import lab11.compulsory.Entities.Student;
 import lab11.compulsory.Entities.Subject;
 import lab11.compulsory.Entities.User;
+import lab11.compulsory.IRepository.IStudentRepository;
+import lab11.compulsory.IRepository.ISubjectRepository;
+import lab11.compulsory.Repository.StudentRepository;
+import lab11.compulsory.Repository.SubjectRepository;
 
 public class Mapper {
+
+    private final ISubjectRepository subjectRepository = new SubjectRepository();
+    private final IStudentRepository studentRepository = new StudentRepository();
+
+
     public StudentDTO ToStudentDTO(Student student){
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.id = student.getId();
@@ -50,4 +62,19 @@ public class Mapper {
     public User ToUser(CreateUserDTO createUserDTO){
         return new User(createUserDTO.username, createUserDTO.password);
     }
+
+
+    public GradeDTO ToGradeDTO(Grade grade){
+        GradeDTO gradeDTO = new GradeDTO();
+        gradeDTO.id = grade.getId();
+        gradeDTO.student = grade.getStudent();
+        gradeDTO.subject = grade.getSubject();
+        return gradeDTO;
+    }
+
+    public Grade ToGrade(CreateGradeDTO createGradeDTO){return new Grade(studentRepository.FindById(createGradeDTO.studentId),
+                                                                         subjectRepository.FindById(createGradeDTO.subjectId),
+                                                                          createGradeDTO.grade);}
+
+
 }
