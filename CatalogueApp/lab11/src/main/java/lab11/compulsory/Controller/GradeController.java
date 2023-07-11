@@ -32,6 +32,7 @@ public class GradeController {
         return mapper.ToGradeDTO(gradeService.FindById(id));
     }
 
+    //cand adaug grade, nu ma mai lasa sa dau get la grade si student
     @PostMapping("/add/grade")
     public boolean AddGrade(@RequestParam(name = "studentId") int studentId,
                             @RequestParam(name = "subjectId") int subjectId,
