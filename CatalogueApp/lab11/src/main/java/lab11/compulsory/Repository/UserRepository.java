@@ -4,11 +4,13 @@ import lab11.compulsory.Entities.Subject;
 import lab11.compulsory.Entities.User;
 import lab11.compulsory.Manager.Manager;
 import lab11.compulsory.IRepository.IUserRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class UserRepository implements IUserRepository {
     public User FindById(int id){
         TypedQuery<User> query = Manager.getInstance().getManager().createNamedQuery("User.findById", User.class);
@@ -35,6 +37,9 @@ public class UserRepository implements IUserRepository {
     }
 
     public void DeleteById(int id){
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         User user = Manager.getInstance().getManager().find(User.class,id);
         Manager.getInstance().getManager().remove(user);
         Manager.getInstance().getManager().getTransaction().commit();

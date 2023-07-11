@@ -4,8 +4,11 @@ import lab11.compulsory.DTOs.StudentDTOs.CreateStudentDTO;
 import lab11.compulsory.DTOs.StudentDTOs.StudentDTO;
 import lab11.compulsory.DTOs.SubjectDTOs.CreateSubjectDTO;
 import lab11.compulsory.DTOs.SubjectDTOs.SubjectDTO;
+import lab11.compulsory.DTOs.UserDTOs.CreateUserDTO;
+import lab11.compulsory.DTOs.UserDTOs.UserDTO;
 import lab11.compulsory.Entities.Student;
 import lab11.compulsory.Entities.Subject;
+import lab11.compulsory.Entities.User;
 
 public class Mapper {
     public StudentDTO ToStudentDTO(Student student){
@@ -34,5 +37,17 @@ public class Mapper {
 
     public Subject ToSubject(CreateSubjectDTO createSubjectDTO){
         return new Subject(createSubjectDTO.name, createSubjectDTO.credits);
+    }
+
+    public UserDTO ToUserDTO(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.id = user.getId();
+        userDTO.username = user.getUsername();
+        userDTO.password = user.getPassword();
+        return userDTO;
+    }
+
+    public User ToUser(CreateUserDTO createUserDTO){
+        return new User(createUserDTO.username, createUserDTO.password);
     }
 }
