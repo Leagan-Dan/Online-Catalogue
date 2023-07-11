@@ -1,8 +1,7 @@
 package lab11.compulsory.Controller;
 
-import lab11.compulsory.DTOs.CreateStudentDTO;
-import lab11.compulsory.DTOs.StudentDTO;
-import lab11.compulsory.Entities.Student;
+import lab11.compulsory.DTOs.StudentDTOs.CreateStudentDTO;
+import lab11.compulsory.DTOs.StudentDTOs.StudentDTO;
 import lab11.compulsory.Mapper.Mapper;
 import lab11.compulsory.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

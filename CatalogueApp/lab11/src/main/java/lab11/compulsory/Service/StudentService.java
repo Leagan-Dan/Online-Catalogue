@@ -1,9 +1,8 @@
 package lab11.compulsory.Service;
 
-import lab11.compulsory.DTOs.CreateStudentDTO;
+import lab11.compulsory.DTOs.StudentDTOs.CreateStudentDTO;
 import lab11.compulsory.Entities.Student;
 import lab11.compulsory.IRepository.IStudentRepository;
-import lab11.compulsory.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

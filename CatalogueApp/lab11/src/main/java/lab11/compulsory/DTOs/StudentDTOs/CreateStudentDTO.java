@@ -1,4 +1,4 @@
-package lab11.compulsory.DTOs;
+package lab11.compulsory.DTOs.StudentDTOs;
 
 import lab11.compulsory.Entities.Grade;
 

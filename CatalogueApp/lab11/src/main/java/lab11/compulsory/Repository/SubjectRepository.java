@@ -3,9 +3,11 @@ package lab11.compulsory.Repository;
 import lab11.compulsory.Entities.Subject;
 import lab11.compulsory.Manager.Manager;
 import lab11.compulsory.IRepository.ISubjectRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class SubjectRepository implements ISubjectRepository {
     public Subject FindByName(String name){
         try{
@@ -40,7 +42,11 @@ public class SubjectRepository implements ISubjectRepository {
     }
 
     public void DeleteById(int id){
+        if(!Manager.getInstance().getManager().getTransaction().isActive()) {
+            Manager.getInstance().getManager().getTransaction().begin();
+        }
         Subject subject = Manager.getInstance().getManager().find(Subject.class,id);
+        System.out.println(subject);
         Manager.getInstance().getManager().remove(subject);
         Manager.getInstance().getManager().getTransaction().commit();
     }
