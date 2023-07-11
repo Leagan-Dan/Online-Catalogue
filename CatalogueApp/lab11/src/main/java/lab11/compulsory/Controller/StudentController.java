@@ -1,6 +1,9 @@
 package lab11.compulsory.Controller;
 
+import lab11.compulsory.DTOs.CreateStudentDTO;
+import lab11.compulsory.DTOs.StudentDTO;
 import lab11.compulsory.Entities.Student;
+import lab11.compulsory.Mapper.Mapper;
 import lab11.compulsory.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,7 @@ import java.util.List;
 @RestController
 public class StudentController {
 
+    private final Mapper mapper= new Mapper();
     private final StudentService studentService;
 
     @Autowired
@@ -23,13 +27,13 @@ public class StudentController {
     }
 
     @GetMapping("/get/students")
-    public List<Student> GetStudents() {
-       return studentService.FindAll();
+    public List<StudentDTO> GetStudents() {
+       return studentService.FindAll().stream().map(mapper::ToStudentDTO).toList();
     }
 
     @GetMapping("/get/student")
-    public Student GetStudent(@RequestParam(name = "id") int id){
-        return studentService.FindById(id);
+    public StudentDTO GetStudent(@RequestParam(name = "id") int id){
+        return mapper.ToStudentDTO(studentService.FindById(id));
     }
 
     @PostMapping("/add/student")
@@ -38,25 +42,19 @@ public class StudentController {
                               @RequestParam(name = "year") int year,
                               @RequestParam(name = "semester") int semester,
                               @RequestParam(name = "email") String email){
-        studentService.AddStudent(firstName, lastName, year, semester, email);
+        CreateStudentDTO createStudentDTO = new CreateStudentDTO(firstName, lastName, year, semester, email);
+        studentService.AddStudent(mapper.ToStudent(createStudentDTO));
         return true;
     }
 
     @PutMapping("/update/student")
-    public boolean UpdateStudent(@RequestParam(name = "id") int id,
+    public StudentDTO UpdateStudent(@RequestParam(name = "id") int id,
                                  @RequestParam(name = "firstName") String firstName,
                                  @RequestParam(name = "lastName") String lastName,
                                  @RequestParam(name = "year") int year,
                                  @RequestParam(name = "semester") int semester,
                                  @RequestParam(name = "email") String email){
-        Student student = studentService.FindById(id);
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setYear(year);
-        student.setSemester(semester);
-        student.setEmail(email);
-        studentService.AddStudent(student);
-        return true;
+        return mapper.ToStudentDTO(studentService.UpdateStudent(id, new CreateStudentDTO(firstName,lastName,year,semester,email)));
     }
 
     @DeleteMapping("/delete/student")

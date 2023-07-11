@@ -1,5 +1,6 @@
 package lab11.compulsory.Service;
 
+import lab11.compulsory.DTOs.CreateStudentDTO;
 import lab11.compulsory.Entities.Student;
 import lab11.compulsory.IRepository.IStudentRepository;
 import lab11.compulsory.Repository.StudentRepository;
@@ -41,5 +42,16 @@ public class StudentService {
 
     public void DeleteStudentById(int id){
         studentRepository.DeleteById(id);
+    }
+
+    public Student UpdateStudent(int id, CreateStudentDTO createStudentDTO){
+        Student student = FindById(id);
+        student.setFirstName(createStudentDTO.firstName);
+        student.setLastName(createStudentDTO.lastName);
+        student.setYear(createStudentDTO.year);
+        student.setSemester(createStudentDTO.semester);
+        student.setEmail(createStudentDTO.email);
+        AddStudent(student);
+        return student;
     }
 }
