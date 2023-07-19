@@ -26,7 +26,7 @@ public class Student implements Serializable {
     private int semester;
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Grade> StudentGrades;
     public Student(){
 

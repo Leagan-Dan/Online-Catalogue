@@ -20,7 +20,7 @@ public class Subject implements Serializable{
     private String name;
     @Column(name="credits")
     private int credits;
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject",  cascade = CascadeType.ALL)
     private List<Grade> subjectGrades;
 
     public Subject(){

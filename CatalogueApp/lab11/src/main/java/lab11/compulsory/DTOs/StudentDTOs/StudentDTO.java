@@ -11,7 +11,4 @@ public class StudentDTO {
     public int year;
     public int semester;
     public String email;
-    public List<Grade> grades;
-
-
 }

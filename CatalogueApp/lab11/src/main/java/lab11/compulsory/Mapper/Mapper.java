@@ -17,6 +17,8 @@ import lab11.compulsory.IRepository.ISubjectRepository;
 import lab11.compulsory.Repository.StudentRepository;
 import lab11.compulsory.Repository.SubjectRepository;
 
+import java.util.Map;
+
 public class Mapper {
 
     private final ISubjectRepository subjectRepository = new SubjectRepository();
@@ -31,7 +33,6 @@ public class Mapper {
         studentDTO.year = student.getYear();
         studentDTO.semester = student.getSemester();
         studentDTO.email = student.getEmail();
-        studentDTO.grades = student.getStudentGrades();
         return studentDTO;
     }
 
@@ -67,8 +68,8 @@ public class Mapper {
     public GradeDTO ToGradeDTO(Grade grade){
         GradeDTO gradeDTO = new GradeDTO();
         gradeDTO.id = grade.getId();
-        gradeDTO.student = grade.getStudent();
-        gradeDTO.subject = grade.getSubject();
+        gradeDTO.student = ToStudentDTO(grade.getStudent());
+        gradeDTO.subject = ToSubjectDTO(grade.getSubject());
         return gradeDTO;
     }
 
