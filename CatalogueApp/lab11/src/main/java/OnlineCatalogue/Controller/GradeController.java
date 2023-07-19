@@ -4,7 +4,9 @@ import OnlineCatalogue.DTOs.GradeDTOs.CreateGradeDTO;
 import OnlineCatalogue.DTOs.GradeDTOs.GradeDTO;
 import OnlineCatalogue.Mapper.Mapper;
 import OnlineCatalogue.Service.GradeService;
+import OnlineCatalogue.Validator.GradeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +32,17 @@ public class GradeController {
         return mapper.ToGradeDTO(gradeService.FindById(id));
     }
 
-    //cand adaug grade, nu ma mai lasa sa dau get la grade si student
     @PostMapping("/add/grade")
-    public boolean AddGrade(@RequestParam(name = "studentId") int studentId,
-                            @RequestParam(name = "subjectId") int subjectId,
-                            @RequestParam(name = "grade") int grade){
+    public ResponseEntity<?> AddGrade(@RequestParam(name = "studentId") int studentId,
+                                   @RequestParam(name = "subjectId") int subjectId,
+                                   @RequestParam(name = "grade") int grade){
         CreateGradeDTO createGradeDTO = new CreateGradeDTO(studentId, subjectId, grade);
-        gradeService.AddGrade(mapper.ToGrade(createGradeDTO));
-        return true;
+        GradeValidator gradeValidator = new GradeValidator();
+        ResponseEntity<?> gradeResponse = gradeValidator.Validate(createGradeDTO);
+        if(gradeResponse.equals(ResponseEntity.ok("Grade added successfully."))) {
+            gradeService.AddGrade(mapper.ToGrade(createGradeDTO));
+        }
+        return gradeResponse;
     }
 
     @PutMapping("/update/grade")

@@ -27,7 +27,8 @@ public class GradeService {
 
     public List<Grade> FindAll(){return gradeRepository.FindAll();}
 
-    public void AddGrade(Grade grade) {gradeRepository.Create(grade);
+    public void AddGrade(Grade grade) {
+        gradeRepository.Create(grade);
     }
 
     public void DeleteGradeById(int id) {gradeRepository.DeleteById(id);}
