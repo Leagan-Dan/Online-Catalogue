@@ -68,6 +68,7 @@ public class Mapper {
         gradeDTO.id = grade.getId();
         gradeDTO.student = ToStudentDTO(grade.getStudent());
         gradeDTO.subject = ToSubjectDTO(grade.getSubject());
+        gradeDTO.grade = grade.getGrade();
         return gradeDTO;
     }
 
