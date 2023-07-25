@@ -2,7 +2,9 @@ package OnlineCatalogue.Controller;
 
 import OnlineCatalogue.DTOs.GradeDTOs.CreateGradeDTO;
 import OnlineCatalogue.DTOs.GradeDTOs.GradeDTO;
+import OnlineCatalogue.Entities.Grade;
 import OnlineCatalogue.Mapper.Mapper;
+import OnlineCatalogue.Response.ApiResponse;
 import OnlineCatalogue.Service.GradeService;
 import OnlineCatalogue.Validator.GradeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,12 @@ public class GradeController {
     }
 
     @GetMapping("/get/grade")
-    public GradeDTO GetGrade(@RequestParam(name = "id") int id){
-        return mapper.ToGradeDTO(gradeService.FindById(id));
+    public ApiResponse<GradeDTO> GetGrade(@RequestParam(name = "id") int id){
+        GradeValidator gradeValidator = new GradeValidator();
+        if(gradeValidator.ValidateId(id).equals(ResponseEntity.ok("Id found."))){
+            return new ApiResponse<GradeDTO>("Grade found.",  mapper.ToGradeDTO(gradeService.FindById(id)));
+        }
+        return new ApiResponse<GradeDTO>("Grade not found.");
     }
 
     @PostMapping("/add/grade")
