@@ -5,6 +5,7 @@ import OnlineCatalogue.Entities.Grade;
 import OnlineCatalogue.IRepository.IGradeRepository;
 import OnlineCatalogue.IRepository.IStudentRepository;
 import OnlineCatalogue.IRepository.ISubjectRepository;
+import OnlineCatalogue.Validator.GradeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,16 @@ public class GradeService {
         gradeRepository.Create(grade);
     }
 
-    public void DeleteGradeById(int id) {gradeRepository.DeleteById(id);}
+    public void DeleteGradeById(int id) {
+        gradeRepository.DeleteById(id);
+    }
 
     public Grade UpdateGrade(long id, CreateGradeDTO createGradeDTO){
         Grade grade = FindById(id);
         grade.setStudent(studentRepository.FindById(createGradeDTO.studentId));
         grade.setSubject(subjectRepository.FindById(createGradeDTO.subjectId));
         grade.setGrade(createGradeDTO.grade);
+        AddGrade(grade);
         return grade;
     }
 }

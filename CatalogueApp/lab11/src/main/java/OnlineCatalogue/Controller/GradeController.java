@@ -46,16 +46,27 @@ public class GradeController {
     }
 
     @PutMapping("/update/grade")
-    public GradeDTO UpdateGrade(@RequestParam(name = "id") long id,
-                                @RequestParam(name = "student") int studentId,
-                                @RequestParam(name = "subject") int subjectId,
+    public ResponseEntity<?> UpdateGrade(@RequestParam(name = "id") long id,
+                                @RequestParam(name = "studentId") int studentId,
+                                @RequestParam(name = "subjectId") int subjectId,
                                 @RequestParam(name = "grade") int grade){
-        return mapper.ToGradeDTO(gradeService.UpdateGrade(id, new CreateGradeDTO(studentId,subjectId,grade)));
+        CreateGradeDTO createGradeDTO = new CreateGradeDTO(studentId,subjectId,grade);
+        GradeValidator gradeValidator = new GradeValidator();
+        ResponseEntity<?> gradeResponse = gradeValidator.ValidateUpdate(id, createGradeDTO);
+        if(gradeResponse.equals(ResponseEntity.ok("Grade updated successfully."))) {
+            gradeService.UpdateGrade(id, createGradeDTO);
+        }
+        return gradeResponse;
     }
 
     @DeleteMapping("/delete/grade")
-    public boolean DeleteGrade(@RequestParam(name = "id") int id){
-        gradeService.DeleteGradeById(id);
-        return true;
+    public ResponseEntity<?> DeleteGrade(@RequestParam(name = "id") int id){
+        GradeValidator gradeValidator = new GradeValidator();
+        ResponseEntity<?> gradeResponse = gradeValidator.ValidateId(id);
+        if(gradeResponse.equals(ResponseEntity.ok("Id found."))){
+            gradeService.DeleteGradeById(id);
+            return ResponseEntity.ok("Grade deleted successfully.");
+        }
+        return gradeResponse;
     }
 }
