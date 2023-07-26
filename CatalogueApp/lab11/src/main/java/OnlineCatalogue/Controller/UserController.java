@@ -62,7 +62,7 @@ public class UserController {
         ResponseEntity<?> userResponse = userValidator.ValidateId(id);
         if(userResponse.equals(ResponseEntity.ok("Id found."))) {
             userService.DeleteUSer(id);
-            return ResponseEntity.ok("User deleted successfully");
+            return ResponseEntity.ok("User deleted successfully.");
         }
         return userResponse;
     }
