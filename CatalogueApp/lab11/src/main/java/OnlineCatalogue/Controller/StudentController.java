@@ -1,10 +1,14 @@
 package OnlineCatalogue.Controller;
 
 import OnlineCatalogue.DTOs.StudentDTOs.CreateStudentDTO;
+import OnlineCatalogue.Entities.Student;
 import OnlineCatalogue.Mapper.Mapper;
 import OnlineCatalogue.DTOs.StudentDTOs.StudentDTO;
+import OnlineCatalogue.Response.ApiResponse;
 import OnlineCatalogue.Service.StudentService;
+import OnlineCatalogue.Validator.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,34 +35,53 @@ public class StudentController {
     }
 
     @GetMapping("/get/student")
-    public StudentDTO GetStudent(@RequestParam(name = "id") int id){
-        return mapper.ToStudentDTO(studentService.FindById(id));
+    public ApiResponse<StudentDTO> GetStudent(@RequestParam(name = "id") int id){
+        StudentValidator studentValidator = new StudentValidator();
+        if(studentValidator.ValidateId(id).equals(ResponseEntity.ok("Id found."))){
+            return new ApiResponse<StudentDTO>("Student found.", mapper.ToStudentDTO(studentService.FindById(id)));
+        }
+        return new ApiResponse<StudentDTO>("Student not found.");
     }
 
     @PostMapping("/add/student")
-    public boolean AddStudent(@RequestParam(name = "firstName") String firstName,
+    public ResponseEntity<?> AddStudent(@RequestParam(name = "firstName") String firstName,
                               @RequestParam(name = "lastName") String lastName,
                               @RequestParam(name = "year") int year,
                               @RequestParam(name = "semester") int semester,
                               @RequestParam(name = "email") String email){
         CreateStudentDTO createStudentDTO = new CreateStudentDTO(firstName, lastName, year, semester, email);
-        studentService.AddStudent(mapper.ToStudent(createStudentDTO));
-        return true;
+        StudentValidator studentValidator = new StudentValidator();
+        ResponseEntity<?> studentResponse = studentValidator.Validate(createStudentDTO);
+        if(studentResponse.equals(ResponseEntity.ok("Student added successfully."))) {
+            studentService.AddStudent(mapper.ToStudent(createStudentDTO));
+        }
+        return studentResponse;
     }
 
     @PutMapping("/update/student")
-    public StudentDTO UpdateStudent(@RequestParam(name = "id") int id,
+    public ResponseEntity<?> UpdateStudent(@RequestParam(name = "id") int id,
                                  @RequestParam(name = "firstName") String firstName,
                                  @RequestParam(name = "lastName") String lastName,
                                  @RequestParam(name = "year") int year,
                                  @RequestParam(name = "semester") int semester,
                                  @RequestParam(name = "email") String email){
-        return mapper.ToStudentDTO(studentService.UpdateStudent(id, new CreateStudentDTO(firstName,lastName,year,semester,email)));
+        CreateStudentDTO createStudentDTO = new CreateStudentDTO(firstName,lastName,year,semester,email);
+        StudentValidator studentValidator = new StudentValidator();
+        ResponseEntity<?> studentResponse = studentValidator.Validate(id, createStudentDTO);
+        if(studentResponse.equals(ResponseEntity.ok("Student updated successfully."))){
+            studentService.UpdateStudent(id, createStudentDTO);
+        }
+        return studentResponse;
     }
 
     @DeleteMapping("/delete/student")
-    public boolean DeleteStudent(@RequestParam(name = "id") int id){
-        studentService.DeleteStudentById(id);
-        return true;
+    public ResponseEntity<?> DeleteStudent(@RequestParam(name = "id") int id){
+        StudentValidator studentValidator = new StudentValidator();
+        ResponseEntity<?> studentResponse = studentValidator.ValidateId(id);
+        if(studentResponse.equals(ResponseEntity.ok("Id found."))){
+            studentService.DeleteStudentById(id);
+            return ResponseEntity.ok("Student deleted successfully.");
+        }
+        return studentResponse;
     }
 }
