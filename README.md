@@ -1,5 +1,5 @@
 # Online-Catalogue
-Personal project for managing an online catalogue using Java technologies
+Personal project for managing an online catalogue using different Java technologies
 
 - Entity
   
