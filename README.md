@@ -1,4 +1,4 @@
-# Java-Back
+# Online-Catalogue
 Personal project for managing an online catalogue using Java technologies
 
 - Entity
