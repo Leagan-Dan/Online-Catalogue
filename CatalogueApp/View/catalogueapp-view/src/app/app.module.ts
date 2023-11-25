@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteStudentComponent } from './delete-student/delete-student.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DeleteStudentComponent
   ],
   imports: [
     BrowserModule,

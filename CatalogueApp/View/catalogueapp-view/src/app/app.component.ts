@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { StudentsService } from './students.service';
+import { StudentsService } from './services/students/students.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PostStudentService } from './post-student.service';
+import { PostStudentService } from './services/students/post-student.service';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,9 @@
+<form [formGroup]="deleteStudentForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label>Id</label>
+        <input formControlName="id" type="text" class="form-control">
+      </div>
+    
+    <button type="btn" class="btn btn-primary">Delete student</button>
+</form>
