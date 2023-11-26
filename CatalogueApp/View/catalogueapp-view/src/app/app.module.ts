@@ -9,6 +9,7 @@ import { DeleteStudentComponent } from './delete-student/delete-student.componen
 import { UpdateStudentComponent } from './update-student/update-student.component';
 import { GetStudentComponent } from './get-student/get-student.component';
 import { GetUserComponent } from './get-user/get-user.component';
+import { PostUserComponent } from './post-user/post-user.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GetUserComponent } from './get-user/get-user.component';
     DeleteStudentComponent,
     UpdateStudentComponent,
     GetStudentComponent,
-    GetUserComponent
+    GetUserComponent,
+    PostUserComponent
   ],
   imports: [
     BrowserModule,
