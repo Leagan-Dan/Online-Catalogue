@@ -1,0 +1,21 @@
+<h2>Get User</h2>
+<form [formGroup]="getUserForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label>Id</label>
+        <input formControlName="id" type="text" class="form-control">
+      </div>
+    
+    <button type="btn" class="btn btn-primary">Get User</button>
+</form>
+
+<ul *ngIf="specificUser; else notFound">
+    <li>
+        {{specificUser.username}} {{specificUser.password}}
+    </li>
+</ul>
+<ng-template #notFound>
+    <p>
+        {{message}}
+    </p>
+</ng-template>

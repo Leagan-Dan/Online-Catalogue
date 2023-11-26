@@ -1,15 +1,12 @@
-<h2>Get Students</h2>
-<button (click)="getStudents()" type="submit" class="btn btn-primary">Get Students</button>
+<h2>Update Student</h2>
 
-<ul>
-  <li *ngFor="let student of students">
-    {{ student.firstName }} {{ student.lastName }}, year: {{student.year}}, semester: {{student.semester}}- {{ student.email }}
-  </li>
-</ul>
+<form [formGroup]="updateStudentForm" (ngSubmit)="onSubmit()">
+   
+   <div class="form-group">
+    <label>Id</label>
+    <input formControlName="id" type="text" class="form-control">
+  </div>
 
-<h2>Add student</h2>
-
-<form [formGroup]="addStudentForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label>First Name</label>
     <input formControlName="firstName" type="text" class="form-control">
@@ -41,13 +38,5 @@
     <input formControlName="email" type="text" class="form-control">
   </div>
   
-  <button type="submit" class="btn btn-primary">Add Student</button>
+  <button type="submit" class="btn btn-primary">Update Student</button>
 </form>
-
-<app-get-student></app-get-student>
-<app-delete-student></app-delete-student>
-<app-update-student></app-update-student>
-
-<hr>
-
-<app-get-user></app-get-user>

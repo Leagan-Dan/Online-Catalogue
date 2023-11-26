@@ -24,3 +24,4 @@ export class DeleteStudentComponent {
     console.log("am apasat pe delete")
   }
 }
+``

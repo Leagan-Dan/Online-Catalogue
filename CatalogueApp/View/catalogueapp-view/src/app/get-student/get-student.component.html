@@ -1,0 +1,21 @@
+<h2>Get Student</h2>
+<form [formGroup]="getStudentForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label>Id</label>
+        <input formControlName="id" type="text" class="form-control">
+      </div>
+    
+    <button type="btn" class="btn btn-primary">Get student</button>
+</form>
+
+<ul *ngIf="specificStudent; else notFound">
+    <li>
+        {{specificStudent.firstName}} {{specificStudent.lastName}}, year: {{specificStudent.year}}, semester: {{specificStudent.semester}}- {{specificStudent.email}}
+    </li>
+</ul>
+<ng-template #notFound>
+    <p>
+        {{message}}
+    </p>
+</ng-template>
