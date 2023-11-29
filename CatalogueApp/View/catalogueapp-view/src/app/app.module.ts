@@ -10,6 +10,9 @@ import { UpdateStudentComponent } from './update-student/update-student.componen
 import { GetStudentComponent } from './get-student/get-student.component';
 import { GetUserComponent } from './get-user/get-user.component';
 import { PostUserComponent } from './post-user/post-user.component';
+import { StudentsComponent } from './students/students.component';
+import { AllFormsComponent } from './all-forms/all-forms.component';
+import { StudentPageComponent } from './student-page/student-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { PostUserComponent } from './post-user/post-user.component';
     UpdateStudentComponent,
     GetStudentComponent,
     GetUserComponent,
-    PostUserComponent
+    PostUserComponent,
+    StudentsComponent,
+    AllFormsComponent,
+    StudentPageComponent
   ],
   imports: [
     BrowserModule,

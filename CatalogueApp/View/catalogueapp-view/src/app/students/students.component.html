@@ -1,0 +1,12 @@
+<button (click)="getStudents()" type="submit" class="btn btn-primary">Get Students</button>
+
+<ul>
+  <p *ngFor="let student of students">
+    <li >
+    {{ student.firstName }} {{ student.lastName }}, year: {{student.year}}, semester: {{student.semester}}- {{ student.email }} 
+    </li>
+    <button (click)="goToStudent(student.id)" class="btn btn-primary" type="btn">Access student</button>
+  </p>
+</ul>
+
+<router-outlet></router-outlet>

@@ -15,9 +15,9 @@ export class DeleteStudentService {
     console.log("am intrat in service cu" + studentId);
     const { id} = studentId;
     const params = new HttpParams()
-          .set('id', id)
+          .set('id', id)  
 
-    return this._http.delete<any>(this._url, { params });
+    return this._http.delete(this._url, { params, responseType: 'text' });
   }
 }
 

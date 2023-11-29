@@ -1,0 +1,13 @@
+<p>student-page works!</p>
+
+<p *ngIf="studentId">
+   Id: {{studentId}}
+</p>
+
+<div *ngIf="student">
+<p>
+    {{student.firstName}} {{student.lastName}}, year: {{student.year}}, semester: {{student.semester}}- {{student.email}}
+</p>
+
+<button (click)="deleteStudent()" class="btn btn-primary" type="button">Delete Student</button>
+</div>
