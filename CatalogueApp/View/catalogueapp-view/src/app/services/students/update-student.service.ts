@@ -20,7 +20,7 @@ export class UpdateStudentService {
           .set('year', year.toString())
           .set('semester', semester.toString())
           .set('email', email);
-    return this._http.put<any>(this._url, null, { params });
+    return this._http.put(this._url, null, { params, responseType: 'text'  });
   }
 
 }

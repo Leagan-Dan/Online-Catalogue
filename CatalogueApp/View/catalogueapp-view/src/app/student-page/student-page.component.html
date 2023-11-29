@@ -10,4 +10,43 @@
 </p>
 
 <button (click)="deleteStudent()" class="btn btn-primary" type="button">Delete Student</button>
+<button (click)="setUpdate()"class="btn btn-primary" type="button">Update Student</button>
+
+<div *ngIf="update">
+<form [formGroup]="updateStudentForm" (ngSubmit)="updateStudent()">
+ 
+   <div class="form-group">
+     <label>First Name</label>
+     <input formControlName="firstName" type="text" class="form-control">
+   </div>
+ 
+   <div class="form-group">
+     <label>Last Name</label>
+     <input formControlName="lastName" type="text" class="form-control">
+   </div>
+ 
+   <div class="form-group">
+     <label for="year">Year:</label>
+     <select id="year" formControlName="year">
+       <option value="default">Select Year</option>
+       <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+     </select>
+   </div>
+ 
+   <div class="form-group">
+     <label for="semester">Semester:</label>
+     <select id="semester" formControlName="semester">
+       <option value="default">Select Semester</option>
+       <option *ngFor="let semester of semesters" [value]="semester">{{ semester }}</option>
+     </select>
+   </div>
+ 
+   <div class="form-group">
+     <label>Email</label>
+     <input formControlName="email" type="text" class="form-control">
+   </div>
+   
+   <button type="submit" class="btn btn-primary">Update Student</button>
+ </form>
+</div>
 </div>
