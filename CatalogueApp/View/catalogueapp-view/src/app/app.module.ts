@@ -13,6 +13,10 @@ import { PostUserComponent } from './post-user/post-user.component';
 import { StudentsComponent } from './students/students.component';
 import { AllFormsComponent } from './all-forms/all-forms.component';
 import { StudentPageComponent } from './student-page/student-page.component';
+import { AddSubjectComponent } from './add-subject/add-subject.component';
+import { DeleteSubjectComponent } from './delete-subject/delete-subject.component';
+import { UpdateSubjectComponent } from './update-subject/update-subject.component';
+import { GetSubjectComponent } from './get-subject/get-subject.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { StudentPageComponent } from './student-page/student-page.component';
     PostUserComponent,
     StudentsComponent,
     AllFormsComponent,
-    StudentPageComponent
+    StudentPageComponent,
+    AddSubjectComponent,
+    DeleteSubjectComponent,
+    UpdateSubjectComponent,
+    GetSubjectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<h2>Delete Subject</h2>
+<form [formGroup]="deleteSubjectForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label>Id</label>
+        <input formControlName="id" type="text" class="form-control">
+      </div>
+    
+    <button type="btn" class="btn btn-primary">Delete Subject</button>
+</form>

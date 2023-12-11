@@ -6,7 +6,7 @@ import { StudentPageComponent } from './student-page/student-page.component';
 
 const routes: Routes = [
   {path: '', redirectTo:"/students", pathMatch: 'full'},
-  {path: 'all-forms', component: AllFormsComponent},
+  {path: 'admin', component: AllFormsComponent},
   {path: 'students', component: StudentsComponent},
   {path: 'student-page/:id', component: StudentPageComponent}
 ];
