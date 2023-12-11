@@ -49,4 +49,10 @@
    <button type="submit" class="btn btn-primary">Update Student</button>
  </form>
 </div>
+
+<div *ngFor="let grade of grades">
+  <p>
+      {{grade.student.firstName}} {{grade.student.lastName}}, subject: {{grade.subject.name}}, grade: {{grade.grade}}
+  </p>
+
 </div>

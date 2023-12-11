@@ -5,6 +5,7 @@ import { GetStudentService } from '../services/students/get-student.service';
 import { DeleteStudentService } from '../services/students/delete-student.service';
 import { UpdateStudentService } from '../services/students/update-student.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { GradesService } from '../services/grades/grades.service';
 
 @Component({
   selector: 'app-student-page',
@@ -18,6 +19,7 @@ export class StudentPageComponent implements OnInit{
   deleted=false;
   update=false;
 
+  grades: any[] = [];
   years: number[] = [1, 2, 3];
   semesters: number[] = [1,2];
 
@@ -29,7 +31,8 @@ export class StudentPageComponent implements OnInit{
     email: ['', Validators.required]
   });
   
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private _getStudentService: GetStudentService, private _deleteStudentService: DeleteStudentService, private _updateStudentService: UpdateStudentService) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private _getStudentService: GetStudentService, private _deleteStudentService: DeleteStudentService, private _updateStudentService: UpdateStudentService, 
+              private _gradesService: GradesService) {}
 
   ngOnInit(){
     this.route.params.subscribe(
@@ -40,6 +43,7 @@ export class StudentPageComponent implements OnInit{
           respone => {this.student=respone.data},
           error => {console.error(error)}
         )
+        this.getStudentGrades(this.studentId);
       }
     )
   }
@@ -77,4 +81,15 @@ export class StudentPageComponent implements OnInit{
     }
     )
     }
+
+  getStudentGrades(id: any){
+    this._gradesService.getGrades().subscribe(
+      data=>{
+        this.grades = data.filter((grade: { student: { id: any; }; }) => grade.student.id === this.studentId);
+      },
+      error=>console.error(error)
+    )
+  }
+
+  
 }
