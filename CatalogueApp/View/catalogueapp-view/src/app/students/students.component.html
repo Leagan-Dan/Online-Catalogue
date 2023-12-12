@@ -1,7 +1,9 @@
 <button (click)="getStudents()" type="submit" class="btn btn-primary">Get Students</button>
 
+<input type="text" [(ngModel)]="searchTerm" placeholder="Filter by Name">
+
 <ul>
-  <p *ngFor="let student of students">
+  <p *ngFor="let student of filteredStudents">
     <li >
     {{ student.firstName }} {{ student.lastName }}, year: {{student.year}}, semester: {{student.semester}}- {{ student.email }} 
     </li>

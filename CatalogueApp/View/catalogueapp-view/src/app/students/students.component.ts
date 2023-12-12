@@ -8,21 +8,31 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent {
-  students:any[]=[];
-  
-  constructor(private _studentsService: StudentsService, private route: ActivatedRoute, private router: Router){}
-  
+  students: any[] = [];
+  filteredStudents: any[] = [];
+  searchTerm: string = '';
+
+  constructor(private _studentsService: StudentsService, private route: ActivatedRoute, private router: Router) {}
+
   getStudents() {
     this._studentsService.getStudents().subscribe(
       data => {
         this.students = data;
+        this.filterStudents(); // Apply initial filtering
       },
       error => {
         console.error('Error fetching students:', error);
-      })
-    }
+      });
+  }
 
-    goToStudent(studentId: any) {
-      this.router.navigate(['student-page', studentId]);
-    }
+  filterStudents() {
+    // Filter students based on the search term
+    this.filteredStudents = this.students.filter((student) =>
+      `${student.firstName} ${student.lastName}`.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  goToStudent(studentId: any) {
+    this.router.navigate(['student-page', studentId]);
+  }
 }

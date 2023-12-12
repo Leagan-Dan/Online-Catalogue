@@ -1,1 +1,18 @@
-<p>add-subject works!</p>
+<h2>Add subject</h2>
+
+<form [formGroup]="addSubjectForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Subject Name</label>
+        <input formControlName="name" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="credits">Credits:</label>
+        <select id="credits" formControlName="credits">
+          <option value="default">Select Credits</option>
+          <option *ngFor="let credit of credits" [value]="credit">{{ credit }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add Subject</button>
+</form>

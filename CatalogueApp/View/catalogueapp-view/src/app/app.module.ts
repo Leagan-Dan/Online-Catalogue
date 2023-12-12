@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
 import { UpdateStudentComponent } from './update-student/update-student.component';
 import { GetStudentComponent } from './get-student/get-student.component';
@@ -17,6 +17,8 @@ import { AddSubjectComponent } from './add-subject/add-subject.component';
 import { DeleteSubjectComponent } from './delete-subject/delete-subject.component';
 import { UpdateSubjectComponent } from './update-subject/update-subject.component';
 import { GetSubjectComponent } from './get-subject/get-subject.component';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,12 @@ import { GetSubjectComponent } from './get-subject/get-subject.component';
     AddSubjectComponent,
     DeleteSubjectComponent,
     UpdateSubjectComponent,
-    GetSubjectComponent
+    GetSubjectComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

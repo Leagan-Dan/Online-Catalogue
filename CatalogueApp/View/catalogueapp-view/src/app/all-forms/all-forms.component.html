@@ -1,3 +1,7 @@
+<button (click)="switchStudents()" class="btn btn-primary" [ngClass]="{'red-button': showStudent}">Modify Students</button>
+<button (click)="switchSubjects()" class="btn btn-primary" [ngClass]="{'red-button': showSubject}">Modify Subjects</button>
+
+<div *ngIf="showStudent">
 <h2>Add student</h2>
 
 <form [formGroup]="addStudentForm" (ngSubmit)="onSubmit()">
@@ -34,16 +38,15 @@
   
   <button type="submit" class="btn btn-primary">Add Student</button>
 </form>
-
 <app-delete-student></app-delete-student>
 <app-update-student></app-update-student>
+</div>
 
-<hr>
-
-<app-post-user></app-post-user>
-
-<hr>
-
+<div *ngIf="showSubject">
 <app-get-subject></app-get-subject>
+<app-add-subject></app-add-subject>
 <app-delete-subject></app-delete-subject>
+<app-update-subject></app-update-subject>
+</div>
+
 <router-outlet></router-outlet>

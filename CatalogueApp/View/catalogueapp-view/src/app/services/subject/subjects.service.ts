@@ -22,4 +22,21 @@ export class SubjectsService {
     const params = new HttpParams().set('id', subjectId)
     return this._http.delete(this._urlDelete, {params, responseType:'text'});
   }
+
+  addSubject(subjectData: any): Observable<any>{
+      const{name, credits} = subjectData;
+      const params = new HttpParams()
+        .set('name', name)
+        .set('credits', credits.toString());
+      return this._http.post<any>(this._urlPost, null, {params});
+  }
+
+  updateSubject(subjectData:any): Observable<any>{
+    const {id, name, credits}= subjectData;
+    const params = new HttpParams()
+      .set('id', id)
+      .set('name', name)
+      .set('credits', credits.toString())
+    return this._http.put(this._urlPut, null, {params, responseType:'text'});
+  }
 }

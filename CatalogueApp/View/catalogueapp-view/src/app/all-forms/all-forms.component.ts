@@ -13,6 +13,10 @@ export class AllFormsComponent {
   years: number[] = [1, 2, 3];
   semesters: number[] = [1,2];
 
+  showStudent=false;
+  showSubject=false;
+
+
   addStudentForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -39,5 +43,15 @@ export class AllFormsComponent {
       this._poststudentService.postStudent(studentValue).subscribe(
         respone=>console.log("Student added succesfully", respone)
       )
+    }
+
+    switchStudents(){
+      this.showSubject=false;
+      this.showStudent=true;
+    }
+
+    switchSubjects(){
+      this.showStudent=false;
+      this.showSubject=true;
     }
 }

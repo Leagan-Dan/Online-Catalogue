@@ -1,4 +1,4 @@
-<form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
         <label>Username</label>
@@ -9,12 +9,7 @@
         <label>Password</label>
         <input formControlName="password" type="text" class="form-control">
       </div>
-
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input formControlName="confirmPassword" type="text" class="form-control">
-      </div>
     
     
-    <button type="btn" class="btn btn-primary">Add User</button>
+    <button type="btn" class="btn btn-primary">Login</button>
 </form>
