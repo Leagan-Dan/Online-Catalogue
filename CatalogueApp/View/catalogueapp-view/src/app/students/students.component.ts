@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentsService } from '../services/students/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationServiceService } from '../services/authentication/authentication-service.service';
 
 @Component({
   selector: 'app-students',
@@ -12,7 +13,7 @@ export class StudentsComponent {
   filteredStudents: any[] = [];
   searchTerm: string = '';
 
-  constructor(private _studentsService: StudentsService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private _studentsService: StudentsService, private route: ActivatedRoute, private router: Router, private _authenticationService: AuthenticationServiceService) {}
 
   getStudents() {
     this._studentsService.getStudents().subscribe(
@@ -34,5 +35,18 @@ export class StudentsComponent {
 
   goToStudent(studentId: any) {
     this.router.navigate(['student-page', studentId]);
+  }
+
+  goToAdmin(){
+    if(this._authenticationService.isLoggedIn() && this._authenticationService.isUserAdmin()){
+    this.router.navigate(['admin']);
+    }
+    else{
+      console.log("user not logged in or not admin");
+    }
+  }
+
+  logout(){
+    this._authenticationService.logout();
   }
 }

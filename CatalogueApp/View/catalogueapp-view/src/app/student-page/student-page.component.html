@@ -11,6 +11,25 @@
 
 <button (click)="deleteStudent()" class="btn btn-primary" type="button">Delete Student</button>
 <button (click)="setUpdate()"class="btn btn-primary" type="button">Update Student</button>
+<button (click)="switchGrade()" type="button" class="btn btn-primary">Add Grade</button>
+
+<div *ngIf="grade">
+  <form [formGroup]="addGradeForm" (ngSubmit)="addGrade()">
+ 
+    <div class="form-group">
+      <label>Subject Id</label>
+      <input formControlName="subjectId" type="text" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label>Grade</label>
+      <input formControlName="grade" type="text" class="form-control">
+    </div>
+
+   <button type="submit" class="btn btn-primary">Add Grade</button>
+
+  </form>
+</div>
 
 <div *ngIf="update">
 <form [formGroup]="updateStudentForm" (ngSubmit)="updateStudent()">
@@ -50,9 +69,9 @@
  </form>
 </div>
 
+
 <div *ngFor="let grade of grades">
   <p>
       {{grade.student.firstName}} {{grade.student.lastName}}, subject: {{grade.subject.name}}, grade: {{grade.grade}}
   </p>
-
 </div>

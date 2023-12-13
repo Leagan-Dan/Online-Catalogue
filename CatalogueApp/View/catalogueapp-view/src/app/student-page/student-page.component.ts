@@ -6,6 +6,7 @@ import { DeleteStudentService } from '../services/students/delete-student.servic
 import { UpdateStudentService } from '../services/students/update-student.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { GradesService } from '../services/grades/grades.service';
+import { AuthenticationServiceService } from '../services/authentication/authentication-service.service';
 
 @Component({
   selector: 'app-student-page',
@@ -18,6 +19,7 @@ export class StudentPageComponent implements OnInit{
   studentId: any;
   deleted=false;
   update=false;
+  grade=false;
 
   grades: any[] = [];
   years: number[] = [1, 2, 3];
@@ -30,9 +32,14 @@ export class StudentPageComponent implements OnInit{
     semester: ['default', Validators.required],
     email: ['', Validators.required]
   });
+
+  addGradeForm = this.fb.group({
+    subjectId: ['', Validators.required],
+    grade: ['', Validators.required]
+  })
   
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private _getStudentService: GetStudentService, private _deleteStudentService: DeleteStudentService, private _updateStudentService: UpdateStudentService, 
-              private _gradesService: GradesService) {}
+              private _gradesService: GradesService, private _authenticationSercice: AuthenticationServiceService) {}
 
   ngOnInit(){
     this.route.params.subscribe(
@@ -87,6 +94,19 @@ export class StudentPageComponent implements OnInit{
       data=>{
         this.grades = data.filter((grade: { student: { id: any; }; }) => grade.student.id === this.studentId);
       },
+      error=>console.error(error)
+    )
+  }
+
+  switchGrade(){
+    if(this._authenticationSercice.isUserAdmin()){
+    this.grade=true;
+    }
+  }
+
+  addGrade(){
+    this._gradesService.postGrade(this.studentId, this.addGradeForm.value).subscribe(
+      response=> console.log(response),
       error=>console.error(error)
     )
   }
